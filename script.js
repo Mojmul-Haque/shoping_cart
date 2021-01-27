@@ -16,10 +16,24 @@ plusBtn.addEventListener('click', function() {
 
     // update subtotal price;
     const subTotalPrice = document.getElementById('sub_total_price').innerText
-    const convertSubTotalPrice = parseInt(subTotalPrice);
+    const convertSubTotalPrice = parseFloat(subTotalPrice);
     const currentSubTotalPrice = convertSubTotalPrice + 300
     console.log('convert', convertSubTotalPrice, 'plus ', currentSubTotalPrice)
     document.getElementById('sub_total_price').innerText = currentSubTotalPrice;
+
+    // tax
+    const tax = document.getElementById('tax').innerText;
+    const convertTax = parseFloat(tax);
+    const getTax = convertTax + 1.5
+    document.getElementById('tax').innerText = getTax;
+
+
+
+    // total shoping price
+    const totalShoping = document.getElementById('total_shoping').innerText;
+    const convertTotalShoping = parseFloat(totalShoping);
+    const payTotalShiping = getTax + currentSubTotalPrice
+    document.getElementById('total_shoping').innerText = payTotalShiping;
 })
 
 
