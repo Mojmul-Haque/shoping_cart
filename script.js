@@ -1,40 +1,27 @@
 //plus button event
-const plusBtn = document.getElementById('plus_btn');
-plusBtn.addEventListener('click', function() {
-
-    updateValue('show_quantity');
-
-    // update price;
-
-    const price = document.getElementById('price').innerText;
-    const convertPrice = parseInt(price);
-    console.log('price', convertPrice)
-    const priceSum = convertPrice + 300
-    document.getElementById('price').innerText = priceSum;
 
 
+function clickBtn(btnId, showQuantityId, productPriceId, subtotalPriceId, taxId, totalShopingId) {
+    const plusBtn = document.getElementById(btnId);
+    plusBtn.addEventListener('click', function() {
 
-    // update subtotal price;
-    const subTotalPrice = document.getElementById('sub_total_price').innerText
-    const convertSubTotalPrice = parseFloat(subTotalPrice);
-    const currentSubTotalPrice = convertSubTotalPrice + 300
-    console.log('convert', convertSubTotalPrice, 'plus ', currentSubTotalPrice)
-    document.getElementById('sub_total_price').innerText = currentSubTotalPrice;
+        updateValue(showQuantityId);
 
-    // tax
-    const tax = document.getElementById('tax').innerText;
-    const convertTax = parseFloat(tax);
-    const getTax = convertTax + 1.5
-    document.getElementById('tax').innerText = getTax;
+        // update product price;
+        updateSpan(productPriceId, 300)
 
+        //update sub total price;
+        var currentSubTotalPrice = updateSpan(subtotalPriceId, 300);
 
+        // update tax;
+        var getTax = updateSpan(taxId, 1)
 
-    // total shoping price
-    const totalShoping = document.getElementById('total_shoping').innerText;
-    const convertTotalShoping = parseFloat(totalShoping);
-    const payTotalShiping = getTax + currentSubTotalPrice
-    document.getElementById('total_shoping').innerText = payTotalShiping;
-})
+        // total shoping price
+        totalShopingPrice(totalShopingId, getTax, currentSubTotalPrice)
+    })
+}
+
+clickBtn('plus_btn', 'show_quantity', 'product_price', 'sub_total_price', 'tax', 'total_shoping')
 
 
 function updateValue(id) {
@@ -44,11 +31,25 @@ function updateValue(id) {
     if (currentNumber == 0) {
         return 1;
     }
-
     document.getElementById(id).value = currentNumber;
-
 
 }
 
+// update span value;
+
+function updateSpan(id, productPrice) {
+    const getId = document.getElementById(id).innerText;
+    const convertNumber = parseFloat(getId);
+    const totalPrice = convertNumber + productPrice
+    document.getElementById(id).innerText = totalPrice;
+    return totalPrice
+}
+
+function totalShopingPrice(id, getTax, currentSubTotalPrice) {
+    const totalShoping = document.getElementById(id).innerText;
+    const convertTotalShoping = parseFloat(totalShoping);
+    const payTotalShiping = getTax + currentSubTotalPrice
+    document.getElementById(id).innerText = payTotalShiping;
+}
 
 // minus button
